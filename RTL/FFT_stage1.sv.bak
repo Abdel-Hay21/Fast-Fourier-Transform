@@ -1,0 +1,96 @@
+module FFT_stage1(
+input CLK,nRESET,ENABLE,
+input wire signed [11:0] signal_in_time [0:7], //5 integer   7 fraction
+output reg signed [11:0] x_stage1_real  [0:7],  //6 integer   6 fraction
+output reg signed [11:0] x_stage1_image [0:7],  //6 integer   6 fraction
+output reg stage1_done
+);
+
+
+parameter W1_real= 15'sb00000_1011010100; //12'sb00_1011100100;
+parameter W1_image=15'sb11111_0100101100; //12'sb11_0100011100;
+
+
+parameter W3_real= 15'sb11111_0100101100; //12'sb11_0100101100;
+parameter W3_image=15'sb11111_0100101100; //12'sb11_0100101100;
+
+reg signed [12:0] signal_in_time_ex [0:7];
+reg signed [12:0] x_stage1_real_ex [0:7];
+reg signed [12:0] x_stage1_image_ex [0:7];
+
+reg signed [29:0] signal_temp1, signal_temp2, signal_temp3, signal_temp4;
+
+always@(posedge CLK or negedge nRESET)
+begin
+    if(stage1_done)
+       stage1_done <= 1'b0;
+
+    if(!nRESET)
+    begin
+        stage1_done<=1'b0;
+        for(int i=0; i<8; i=i+1)
+        begin
+            x_stage1_real[i] <=12'sd0;
+            x_stage1_image[i] <=12'sd0;
+        end
+    end
+    else if(ENABLE) begin
+
+    for(int i=0; i<8 ; i=i+1)
+        signal_in_time_ex[i]= {signal_in_time[i][11], signal_in_time[i]};
+
+
+    x_stage1_real_ex[0] = ((signal_in_time_ex[0] + signal_in_time_ex[4]));
+    x_stage1_image_ex[0] = 12'sd0;
+
+    x_stage1_real_ex[1] = ((signal_in_time_ex[1] + signal_in_time_ex[5]));
+    x_stage1_image_ex[1] = 12'sd0;
+
+    x_stage1_real_ex[2] = ((signal_in_time_ex[2] + signal_in_time_ex[6]));
+    x_stage1_image_ex[2] = 12'sd0;
+
+    x_stage1_real_ex[3] = ((signal_in_time_ex[3] + signal_in_time_ex[7]));
+    x_stage1_image_ex[3] = 12'sd0;
+
+
+
+
+    x_stage1_real_ex[4] = ((signal_in_time_ex[0] - signal_in_time_ex[4]));
+    x_stage1_image_ex[4] = 12'sd0;
+
+    signal_temp1 = (({signal_in_time_ex[1] - signal_in_time_ex[5], 2'b00}) * W1_real);
+    x_stage1_real_ex[5] = (signal_temp1 >> 13);
+    signal_temp2 = (({signal_in_time_ex[1] - signal_in_time_ex[5], 2'b00}) * W1_image);
+    x_stage1_image_ex[5] = (signal_temp2 >> 13);
+
+    x_stage1_real_ex[6] = 12'sd0;
+    x_stage1_image_ex[6] = ((signal_in_time_ex[6] - signal_in_time_ex[2]));
+
+    signal_temp3 = (({signal_in_time_ex[3] - signal_in_time_ex[7], 2'b00}) * W3_real);
+    x_stage1_real_ex[7] = (signal_temp3 >>13);
+    signal_temp4 = (({signal_in_time_ex[3] - signal_in_time_ex[7], 2'b00}) * W3_image);
+    x_stage1_image_ex[7] = (signal_temp4 >>13);
+
+
+
+
+
+    for(int i=0; i<8; i=i+1)
+    begin
+       if(x_stage1_real_ex[i][0])
+          x_stage1_real[i] <= ((x_stage1_real_ex[i] + 1) >> 1);
+       else
+          x_stage1_real[i] <= ((x_stage1_real_ex[i]) >> 1);
+
+       if(x_stage1_image_ex[i][0])
+          x_stage1_image[i] <= ((x_stage1_image_ex[i] + 1) >> 1 );
+       else
+          x_stage1_image[i] <= ((x_stage1_image_ex[i]) >> 1);
+    end
+
+
+    stage1_done<=1'b1;      
+    end
+end
+
+endmodule

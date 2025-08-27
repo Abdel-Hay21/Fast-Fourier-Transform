@@ -1,0 +1,14 @@
+module fixed_point_adder (
+    input  signed [6:0] A, 
+    input  signed [4:0] B, 
+    output signed [6:0] SUM 
+);
+
+    wire signed [6:0] B_aligned;
+
+    assign B_aligned = { { (7-6){B[4]} }, B } << 1; 
+
+    assign SUM = A + B_aligned;
+
+endmodule
+

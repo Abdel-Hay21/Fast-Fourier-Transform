@@ -1,0 +1,36 @@
+{F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage1.sv} {1 {vlog -work work -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage1.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FFT_stage1
+
+Top level modules:
+	FFT_stage1
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage2.sv} {1 {vlog -work work -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage2.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FFT_stage2
+
+Top level modules:
+	FFT_stage2
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_tb.sv} {1 {vlog -work work -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_tb.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FFT_tb
+
+Top level modules:
+	FFT_tb
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage3.sv} {1 {vlog -work work -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage3.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FFT_stage3
+
+Top level modules:
+	FFT_stage3
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_TOP.sv} {1 {vlog -work work -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_TOP.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FFT_TOP
+
+Top level modules:
+	FFT_TOP
+
+} {} {}}

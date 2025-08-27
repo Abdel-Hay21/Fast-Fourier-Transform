@@ -1,0 +1,21 @@
+module tb();
+reg [4:0] B_tb;
+reg signed [6:0] B_aligned;
+initial begin
+    
+    B_tb=5'b10101;
+
+    B_aligned = { { (7-5){B_tb[4]} }, B_tb } << 1; 
+
+    $display("B= %d",B_aligned);
+
+    B_aligned = { { (7-6){B_tb[4]} }, B_tb } << 1; 
+
+    $display("B= %d",B_aligned);
+    
+    $finish;
+end
+fixed_point_adder dut(
+.B(B_tb)
+);
+endmodule

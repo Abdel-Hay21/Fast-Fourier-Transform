@@ -1,0 +1,244 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dF:/Faculty/Courses/ADI internship/Final_Project
+vFFT_stagae2
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1754863875
+!i10b 1
+!s100 JimHBJMhLdHcE`GUg2h`]3
+IAJPFk068l[Y[`Yze>CWUS1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 !s105 FFT_stage2_sv_unit
+S1
+Z4 dF:/Faculty/Courses/ADI internship/Final_Project/RTL
+w1754861461
+8F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage2.sv
+FF:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage2.sv
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1754863875.000000
+!s107 F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage2.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage2.sv|
+!i113 1
+Z7 o-work work -sv
+Z8 tCvgOpt 0
+n@f@f@t_stagae2
+vFFT_stagae3
+R0
+R1
+!i10b 1
+!s100 7Jd:DBcj?d8[0J6G]Uo083
+IQan5GZa9G7Dc;Oe0U5O063
+R2
+Z9 !s105 FFT_stage3_sv_unit
+S1
+R4
+w1754861940
+8F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage3.sv
+FF:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage3.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage3.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage3.sv|
+!i113 1
+R7
+R8
+n@f@f@t_stagae3
+vFFT_stage1
+R0
+Z10 !s110 1755579307
+!i10b 1
+!s100 2d2PzFON9iIlCcc=NoRDS0
+I0FGADGT6KokSJkf7HSY552
+R2
+!s105 FFT_stage1_sv_unit
+S1
+R4
+w1755579302
+8FFT_stage1.sv
+FFFT_stage1.sv
+L0 1
+R5
+r1
+!s85 0
+31
+Z11 !s108 1755579307.000000
+Z12 !s107 FFT_tb.sv|FFT_stage3.sv|FFT_stage2.sv|FFT_stage1.sv|FFT_TOP.sv|
+Z13 !s90 -reportprogress|300|FFT_TOP.sv|FFT_stage1.sv|FFT_stage2.sv|FFT_stage3.sv|FFT_tb.sv|
+!i113 1
+R8
+n@f@f@t_stage1
+vFFT_stage2
+R0
+R10
+!i10b 1
+!s100 gILzG`:M@AheQZQS=:hEI2
+Io:08SaH9EYG@f?^?bi5j40
+R2
+R3
+S1
+R4
+w1755576648
+8FFT_stage2.sv
+FFFT_stage2.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R11
+R12
+R13
+!i113 1
+R8
+n@f@f@t_stage2
+vFFT_stage3
+R0
+R10
+!i10b 1
+!s100 WGW5j8^f5C6WE]JQBJell2
+IfOo2Fb3EJ@@7Ud@4GF_Kk2
+R2
+R9
+S1
+R4
+w1755576665
+8FFT_stage3.sv
+FFFT_stage3.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R11
+R12
+R13
+!i113 1
+R8
+n@f@f@t_stage3
+vFFT_tb
+R0
+R10
+!i10b 1
+!s100 ZUCU4LE_gHH`4n::1?nES3
+IdD=WXnzi48hScWFMaM8o]2
+R2
+!s105 FFT_tb_sv_unit
+S1
+R4
+w1755481311
+8FFT_tb.sv
+FFFT_tb.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R11
+R12
+R13
+!i113 1
+R8
+n@f@f@t_tb
+vFFT_TOP
+R0
+R10
+!i10b 1
+!s100 0VDAmB5g13<1b;fzIk8>62
+IRfiDP5bgiGN5ammHPaY>J0
+R2
+!s105 FFT_TOP_sv_unit
+S1
+R4
+w1754888699
+8FFT_TOP.sv
+FFFT_TOP.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R11
+R12
+R13
+!i113 1
+R8
+n@f@f@t_@t@o@p
+vfixed_point_adder
+!s110 1754837466
+!i10b 1
+!s100 M`0X7[bd4CKS99l0@DT@O3
+IUFUJQH[`BBQd06XP:ND=:1
+R2
+R4
+w1754834227
+8F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage1.v
+FF:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage1.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1754837466.000000
+!s107 F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage1.v|
+!s90 -reportprogress|300|-work|work|-stats=none|F:/Faculty/Courses/ADI internship/Final_Project/RTL/FFT_stage1.v|
+!i113 1
+Z14 o-work work
+R8
+vtb
+!s110 1754834888
+!i10b 1
+!s100 iVDIKE:GeANzj49X:3Z?f2
+IMWPF;P9ILgNT6346RYo8a0
+R2
+R4
+w1754834883
+8F:/Faculty/Courses/ADI internship/Final_Project/RTL/rb.v
+FF:/Faculty/Courses/ADI internship/Final_Project/RTL/rb.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1754834888.000000
+!s107 F:/Faculty/Courses/ADI internship/Final_Project/RTL/rb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|F:/Faculty/Courses/ADI internship/Final_Project/RTL/rb.v|
+!i113 1
+R14
+R8
+vUART_TX_tb
+!s110 1754844633
+!i10b 1
+!s100 :]RNk^`Q6`MJQQTXdgQ?n1
+IzGIFeO9Z^240KYMa4CME13
+R2
+df:/Faculty/Courses/ADI internship/Final_Project/RTL
+w1754844633
+8f:\Faculty\Courses\ADI internship\Final_Project\RTL\FFT_stage1.v
+Ff:\Faculty\Courses\ADI internship\Final_Project\RTL\FFT_stage1.v
+L0 11
+R5
+r1
+!s85 0
+31
+!s108 1754844633.000000
+!s107 f:\Faculty\Courses\ADI internship\Final_Project\RTL\FFT_stage1.v|
+!s90 -nologo|-work|work|f:\Faculty\Courses\ADI internship\Final_Project\RTL\FFT_stage1.v|
+!i113 1
+o-nologo -work work
+R8
+n@u@a@r@t_@t@x_tb

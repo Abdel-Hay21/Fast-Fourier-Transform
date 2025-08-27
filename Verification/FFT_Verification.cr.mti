@@ -1,0 +1,100 @@
+{F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_stage3.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_stage3.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module FFT_stage3
+
+Top level modules:
+	FFT_stage3
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/transaction.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/transaction.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/interface.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/interface.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling interface fft_interface
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/testbench_top.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/testbench_top.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package testbench_top_sv_unit
+-- Importing package fft_pkg
+-- Compiling module testbench_top
+
+Top level modules:
+	testbench_top
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/scoreboard.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/scoreboard.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package scoreboard_sv_unit
+-- Importing package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_stage2.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_stage2.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module FFT_stage2
+
+Top level modules:
+	FFT_stage2
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/generator.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/generator.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package generator_sv_unit
+-- Importing package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/monitor.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/monitor.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package monitor_sv_unit
+-- Importing package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/test.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/test.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package test_sv_unit
+-- Importing package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_TOP.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_TOP.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module FFT_TOP
+
+Top level modules:
+	FFT_TOP
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/driver.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/driver.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package driver_sv_unit
+-- Importing package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_stage1.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/FFT_stage1.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module FFT_stage1
+
+Top level modules:
+	FFT_stage1
+
+} {} {}} {F:/Faculty/Courses/ADI internship/Final_Project/Verification/environment.sv} {1 {vlog -work work -vopt -sv -stats=none {F:/Faculty/Courses/ADI internship/Final_Project/Verification/environment.sv}
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling package environment_sv_unit
+-- Importing package fft_pkg
+
+Top level modules:
+	--none--
+
+} {} {}}

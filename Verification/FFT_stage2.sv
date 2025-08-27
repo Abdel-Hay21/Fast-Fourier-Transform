@@ -1,0 +1,68 @@
+module FFT_stage2(
+input wire CLK,nRESET,stage1_done,
+input wire signed [11:0] x_stage1_real [0:7],   //6 integer   6 fraction
+input wire signed [11:0] x_stage1_image [0:7],   //6 integer   6 fraction
+output reg signed [11:0] x_stage2_real [0:7],   //7 integer   5 fraction
+output reg signed [11:0] x_stage2_image [0:7],   //7 integer   5 fraction
+output reg stage2_done
+);
+
+reg signed [12:0] x_stage1_real_ex [0:7];
+reg signed [12:0] x_stage1_image_ex [0:7];
+
+always@(posedge CLK or negedge nRESET)
+begin
+    if(stage2_done)
+       stage2_done <= 1'b0;
+
+    if(!nRESET)
+    begin
+        stage2_done<=1'b0;
+        for(int i=0; i<8; i=i+1)
+        begin
+            x_stage2_real[i] <=12'sd0;
+            x_stage2_image[i] <=12'sd0;
+        end
+    end
+    else if(stage1_done) begin
+
+    for(int i=0; i<8 ; i=i+1)
+    begin
+            x_stage1_real_ex[i]= {x_stage1_real[i][11], x_stage1_real[i]};
+            x_stage1_image_ex[i]= {x_stage1_image[i][11], x_stage1_image[i]};
+    end
+
+
+    x_stage2_real[0] <= ((x_stage1_real_ex[0] + x_stage1_real_ex[2]) >> 1);
+    x_stage2_image[0] <= ((x_stage1_image_ex[0] + x_stage1_image_ex[2]) >> 1);
+
+    x_stage2_real[1] <= ((x_stage1_real_ex[1] + x_stage1_real_ex[3]) >> 1);
+    x_stage2_image[1] <= ((x_stage1_image_ex[1] + x_stage1_image_ex[3]) >> 1);
+
+    x_stage2_real[4] <= ((x_stage1_real_ex[4] + x_stage1_real_ex[6]) >> 1);
+    x_stage2_image[4] <= ((x_stage1_image_ex[4] + x_stage1_image_ex[6]) >> 1);
+
+    x_stage2_real[5] <= ((x_stage1_real_ex[5] + x_stage1_real_ex[7]) >> 1);
+    x_stage2_image[5] <= ((x_stage1_image_ex[5] + x_stage1_image_ex[7]) >> 1);   
+
+
+
+    x_stage2_real[2] <= ((x_stage1_real_ex[0] - x_stage1_real_ex[2]) >> 1);
+    x_stage2_image[2] <= ((x_stage1_image_ex[0] - x_stage1_image_ex[2]) >> 1);
+
+    x_stage2_real[3] <= (( (x_stage1_image_ex[1] - x_stage1_image_ex[3])) >> 1);
+    x_stage2_image[3] <= (( (x_stage1_real_ex[3] - x_stage1_real_ex[1]))  >> 1);
+
+    x_stage2_real[6] <= ((x_stage1_real_ex[4] - x_stage1_real_ex[6]) >> 1);
+    x_stage2_image[6] <= ((x_stage1_image_ex[4] - x_stage1_image_ex[6]) >> 1);
+
+    x_stage2_real[7] <= (( (x_stage1_image_ex[5] - x_stage1_image_ex[7])) >> 1);
+    x_stage2_image[7] <= (( (x_stage1_real_ex[7] - x_stage1_real_ex[5]))  >> 1);    
+    
+
+    stage2_done<=1'b1;
+    end
+
+end
+
+endmodule

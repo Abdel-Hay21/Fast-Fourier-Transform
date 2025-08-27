@@ -1,0 +1,1154 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /testbench_top/vif
+=== Design Unit: work.fft_interface
+=================================================================================
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                          8         8         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /testbench_top/vif --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               CLK           1           1      100.00 
+                                            ENABLE           1           1      100.00 
+                                        FFT_FINISH           1           1      100.00 
+                                            nRESET           1           1      100.00 
+
+Total Node Count     =          4 
+Toggled Node Count   =          4 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (8 of 8 bins)
+
+=================================================================================
+=== Instance: /testbench_top/DUV/link1
+=== Design Unit: work.FFT_stage1
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         5         5         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /testbench_top/DUV/link1
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_stage1.sv
+------------------------------------IF Branch------------------------------------
+    23                                       111     Count coming in to IF
+    23              1                        104         if(stage1_done)
+                                               7     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    26                                       111     Count coming in to IF
+    26              1                          6         if(!nRESET)
+    35              1                        104         else if(ENABLE) begin
+                                               1     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      31        31         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /testbench_top/DUV/link1 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_stage1.sv
+    1                                                module FFT_stage1(
+    2                                                input CLK,nRESET,ENABLE,
+    3                                                input wire signed [11:0] signal_in_time [0:7], //5 integer   7 fraction
+    4                                                output reg signed [11:0] x_stage1_real  [0:7],  //6 integer   6 fraction
+    5                                                output reg signed [11:0] x_stage1_image [0:7],  //6 integer   6 fraction
+    6                                                output reg stage1_done
+    7                                                );
+    8                                                
+    9                                                
+    10                                               parameter W1_real= 12'sb00000_1011011;
+    11                                               parameter W1_image=12'sb11111_0100101;
+    12                                               
+    13                                               
+    14                                               parameter W3_real=12'sb11111_0100101;
+    15                                               parameter W3_image=12'sb11111_0100101;
+    16                                               
+    17                                               reg signed [12:0] signal_in_time_ex [0:7];
+    18                                               
+    19                                               reg signed [23:0] signal_temp1, signal_temp2, signal_temp3, signal_temp4;
+    20                                               
+    21              1                        111     always@(posedge CLK or negedge nRESET)
+    22                                               begin
+    23                                                   if(stage1_done)
+    24              1                        104            stage1_done <= 1'b0;
+    25                                               
+    26                                                   if(!nRESET)
+    27                                                   begin
+    28              1                          6             stage1_done<=1'b0;
+    29              1                          6             for(int i=0; i<8; i=i+1)
+    29              2                         48     
+    30                                                       begin
+    31              1                         48                 x_stage1_real[i] <=12'sd0;
+    32              1                         48                 x_stage1_image[i] <=12'sd0;
+    33                                                       end
+    34                                                   end
+    35                                                   else if(ENABLE) begin
+    36                                               
+    37              1                        104         for(int i=0; i<8 ; i=i+1)
+    37              2                        832     
+    38              1                        832             signal_in_time_ex[i]= {signal_in_time[i][11], signal_in_time[i]};
+    39                                               
+    40                                               
+    41              1                        104         x_stage1_real[0] <= ((signal_in_time_ex[0] + signal_in_time_ex[4]) >> 1);
+    42              1                        104         x_stage1_image[0] <= 12'sd0;
+    43                                               
+    44              1                        104         x_stage1_real[1] <= ((signal_in_time_ex[1] + signal_in_time_ex[5]) >> 1);
+    45              1                        104         x_stage1_image[1] <= 12'sd0;
+    46                                               
+    47              1                        104         x_stage1_real[2] <= ((signal_in_time_ex[2] + signal_in_time_ex[6]) >> 1);
+    48              1                        104         x_stage1_image[2] <= 12'sd0;
+    49                                               
+    50              1                        104         x_stage1_real[3] <= ((signal_in_time_ex[3] + signal_in_time_ex[7]) >> 1);
+    51              1                        104         x_stage1_image[3] <= 12'sd0;
+    52                                               
+    53                                               
+    54                                               
+    55                                               
+    56              1                        104         x_stage1_real[4] <= ((signal_in_time_ex[0] - signal_in_time_ex[4]) >> 1);
+    57              1                        104         x_stage1_image[4] <= 12'sd0;
+    58                                               
+    59              1                        104         signal_temp1 = ((signal_in_time_ex[1] - signal_in_time_ex[5]) * W1_real);
+    60              1                        104         x_stage1_real[5] <= (signal_temp1 >> 8);
+    61              1                        104         signal_temp2 = ((signal_in_time_ex[1] - signal_in_time_ex[5]) * W1_image);
+    62              1                        104         x_stage1_image[5] <= (signal_temp2 >> 8);
+    63                                               
+    64              1                        104         x_stage1_real[6] <= 12'sd0;
+    65              1                        104         x_stage1_image[6] <= ((signal_in_time_ex[6] - signal_in_time_ex[2]) >> 1);
+    66                                               
+    67              1                        104         signal_temp3 = ((signal_in_time_ex[3] - signal_in_time_ex[7]) * W3_real);
+    68              1                        104         x_stage1_real[7] <= (signal_temp3 >> 8);
+    69              1                        104         signal_temp4 = ((signal_in_time_ex[3] - signal_in_time_ex[7]) * W3_image);
+    70              1                        104         x_stage1_image[7] <= (signal_temp4 >> 8);
+    71                                               
+    72              1                        104         stage1_done<=1'b1;      
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        200       200         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /testbench_top/DUV/link1 --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               CLK           1           1      100.00 
+                                            ENABLE           1           1      100.00 
+                                            nRESET           1           1      100.00 
+                                signal_temp1[23-0]           1           1      100.00 
+                                signal_temp2[23-0]           1           1      100.00 
+                                signal_temp3[23-0]           1           1      100.00 
+                                signal_temp4[23-0]           1           1      100.00 
+                                       stage1_done           1           1      100.00 
+
+Total Node Count     =        100 
+Toggled Node Count   =        100 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (200 of 200 bins)
+
+=================================================================================
+=== Instance: /testbench_top/DUV/link2
+=== Design Unit: work.FFT_stage2
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         5         5         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /testbench_top/DUV/link2
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_stage2.sv
+------------------------------------IF Branch------------------------------------
+    15                                       111     Count coming in to IF
+    15              1                        102         if(stage2_done)
+                                               9     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    18                                       111     Count coming in to IF
+    18              1                          6         if(!nRESET)
+    27              1                        102         else if(stage1_done) begin
+                                               3     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      28        28         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /testbench_top/DUV/link2 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_stage2.sv
+    1                                                module FFT_stage2(
+    2                                                input wire CLK,nRESET,stage1_done,
+    3                                                input wire signed [11:0] x_stage1_real [0:7],   //6 integer   6 fraction
+    4                                                input wire signed [11:0] x_stage1_image [0:7],   //6 integer   6 fraction
+    5                                                output reg signed [11:0] x_stage2_real [0:7],   //7 integer   5 fraction
+    6                                                output reg signed [11:0] x_stage2_image [0:7],   //7 integer   5 fraction
+    7                                                output reg stage2_done
+    8                                                );
+    9                                                
+    10                                               reg signed [12:0] x_stage1_real_ex [0:7];
+    11                                               reg signed [12:0] x_stage1_image_ex [0:7];
+    12                                               
+    13              1                        111     always@(posedge CLK or negedge nRESET)
+    14                                               begin
+    15                                                   if(stage2_done)
+    16              1                        102            stage2_done <= 1'b0;
+    17                                               
+    18                                                   if(!nRESET)
+    19                                                   begin
+    20              1                          6             stage2_done<=1'b0;
+    21              1                          6             for(int i=0; i<8; i=i+1)
+    21              2                         48     
+    22                                                       begin
+    23              1                         48                 x_stage2_real[i] <=12'sd0;
+    24              1                         48                 x_stage2_image[i] <=12'sd0;
+    25                                                       end
+    26                                                   end
+    27                                                   else if(stage1_done) begin
+    28                                               
+    29              1                        102         for(int i=0; i<8 ; i=i+1)
+    29              2                        816     
+    30                                                   begin
+    31              1                        816                 x_stage1_real_ex[i]= {x_stage1_real[i][11], x_stage1_real[i]};
+    32              1                        816                 x_stage1_image_ex[i]= {x_stage1_image[i][11], x_stage1_image[i]};
+    33                                                   end
+    34                                               
+    35                                               
+    36              1                        102         x_stage2_real[0] <= ((x_stage1_real_ex[0] + x_stage1_real_ex[2]) >> 1);
+    37              1                        102         x_stage2_image[0] <= ((x_stage1_image_ex[0] + x_stage1_image_ex[2]) >> 1);
+    38                                               
+    39              1                        102         x_stage2_real[1] <= ((x_stage1_real_ex[1] + x_stage1_real_ex[3]) >> 1);
+    40              1                        102         x_stage2_image[1] <= ((x_stage1_image_ex[1] + x_stage1_image_ex[3]) >> 1);
+    41                                               
+    42              1                        102         x_stage2_real[4] <= ((x_stage1_real_ex[4] + x_stage1_real_ex[6]) >> 1);
+    43              1                        102         x_stage2_image[4] <= ((x_stage1_image_ex[4] + x_stage1_image_ex[6]) >> 1);
+    44                                               
+    45              1                        102         x_stage2_real[5] <= ((x_stage1_real_ex[5] + x_stage1_real_ex[7]) >> 1);
+    46              1                        102         x_stage2_image[5] <= ((x_stage1_image_ex[5] + x_stage1_image_ex[7]) >> 1);   
+    47                                               
+    48                                               
+    49                                               
+    50              1                        102         x_stage2_real[2] <= ((x_stage1_real_ex[0] - x_stage1_real_ex[2]) >> 1);
+    51              1                        102         x_stage2_image[2] <= ((x_stage1_image_ex[0] - x_stage1_image_ex[2]) >> 1);
+    52                                               
+    53              1                        102         x_stage2_real[3] <= (( (x_stage1_image_ex[1] - x_stage1_image_ex[3])) >> 1);
+    54              1                        102         x_stage2_image[3] <= (( (x_stage1_real_ex[3] - x_stage1_real_ex[1]))  >> 1);
+    55                                               
+    56              1                        102         x_stage2_real[6] <= ((x_stage1_real_ex[4] - x_stage1_real_ex[6]) >> 1);
+    57              1                        102         x_stage2_image[6] <= ((x_stage1_image_ex[4] - x_stage1_image_ex[6]) >> 1);
+    58                                               
+    59              1                        102         x_stage2_real[7] <= (( (x_stage1_image_ex[5] - x_stage1_image_ex[7])) >> 1);
+    60              1                        102         x_stage2_image[7] <= (( (x_stage1_real_ex[7] - x_stage1_real_ex[5]))  >> 1);    
+    61                                                   
+    62                                               
+    63              1                        102         stage2_done<=1'b1;
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                          8         8         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /testbench_top/DUV/link2 --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               CLK           1           1      100.00 
+                                            nRESET           1           1      100.00 
+                                       stage1_done           1           1      100.00 
+                                       stage2_done           1           1      100.00 
+
+Total Node Count     =          4 
+Toggled Node Count   =          4 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (8 of 8 bins)
+
+=================================================================================
+=== Instance: /testbench_top/DUV/link3
+=== Design Unit: work.FFT_stage3
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         5         5         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /testbench_top/DUV/link3
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_stage3.sv
+------------------------------------IF Branch------------------------------------
+    16                                       110     Count coming in to IF
+    16              1                        101         if(stage3_done)
+                                               9     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    19                                       110     Count coming in to IF
+    19              1                          6         if(!nRESET)
+    28              1                        101         else if(stage2_done) begin
+                                               3     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      28        28         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /testbench_top/DUV/link3 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_stage3.sv
+    1                                                module FFT_stage3(
+    2                                                input wire CLK,nRESET,stage2_done,
+    3                                                input wire signed [11:0] x_stage2_real [0:7],   //7 integer   5 fraction
+    4                                                input wire signed [11:0] x_stage2_image [0:7],   //7 integer   5 fraction
+    5                                                output reg signed [11:0] x_stage3_real [0:7],   //8 integer   4 fraction
+    6                                                output reg signed [11:0] x_stage3_image [0:7],   //8 integer   4 fraction
+    7                                                output reg stage3_done
+    8                                                );
+    9                                                
+    10                                               
+    11                                               reg signed [12:0] x_stage2_real_ex [0:7];
+    12                                               reg signed [12:0] x_stage2_image_ex [0:7];
+    13                                               
+    14              1                        110     always@(posedge CLK or negedge nRESET)
+    15                                               begin
+    16                                                   if(stage3_done)
+    17              1                        101            stage3_done <= 1'b0;
+    18                                               
+    19                                                   if(!nRESET)
+    20                                                   begin
+    21              1                          6             stage3_done<=1'b0;
+    22              1                          6             for(int i=0; i<8; i=i+1)
+    22              2                         48     
+    23                                                       begin
+    24              1                         48                 x_stage3_real[i] <=12'sd0;
+    25              1                         48                 x_stage3_image[i] <=12'sd0;
+    26                                                       end
+    27                                                   end
+    28                                                   else if(stage2_done) begin
+    29                                               
+    30              1                        101         for(int i=0; i<8 ; i=i+1)
+    30              2                        808     
+    31                                                   begin
+    32              1                        808                 x_stage2_real_ex[i]= {x_stage2_real[i][11], x_stage2_real[i]};
+    33              1                        808                 x_stage2_image_ex[i]= {x_stage2_image[i][11], x_stage2_image[i]};
+    34                                                   end
+    35                                               
+    36              1                        101         x_stage3_real[0] <= ((x_stage2_real_ex[0] + x_stage2_real_ex[1]) >> 1);
+    37              1                        101         x_stage3_image[0] <= ((x_stage2_image_ex[0] + x_stage2_image_ex[1]) >> 1);
+    38                                               
+    39              1                        101         x_stage3_real[2] <= ((x_stage2_real_ex[2] + x_stage2_real_ex[3]) >> 1);
+    40              1                        101         x_stage3_image[2] <= ((x_stage2_image_ex[2] + x_stage2_image_ex[3]) >> 1);
+    41                                               
+    42              1                        101         x_stage3_real[4] <= ((x_stage2_real_ex[4] + x_stage2_real_ex[5]) >> 1);
+    43              1                        101         x_stage3_image[4] <= ((x_stage2_image_ex[4] + x_stage2_image_ex[5]) >> 1);
+    44                                               
+    45              1                        101         x_stage3_real[6] <= ((x_stage2_real_ex[6] + x_stage2_real_ex[7]) >> 1);
+    46              1                        101         x_stage3_image[6] <= ((x_stage2_image_ex[6] + x_stage2_image_ex[7]) >> 1);
+    47                                               
+    48                                               
+    49                                               
+    50                                               
+    51              1                        101         x_stage3_real[1] <= ((x_stage2_real_ex[0] - x_stage2_real_ex[1]) >> 1);
+    52              1                        101         x_stage3_image[1] <= ((x_stage2_image_ex[0] - x_stage2_image_ex[1]) >> 1); 
+    53                                               
+    54              1                        101         x_stage3_real[3] <= ((x_stage2_real_ex[2] - x_stage2_real_ex[3]) >> 1);
+    55              1                        101         x_stage3_image[3] <= ((x_stage2_image_ex[2] - x_stage2_image_ex[3]) >> 1);
+    56                                               
+    57              1                        101         x_stage3_real[5] <= ((x_stage2_real_ex[4] - x_stage2_real_ex[5]) >> 1);
+    58              1                        101         x_stage3_image[5] <= ((x_stage2_image_ex[4] - x_stage2_image_ex[5]) >> 1);
+    59                                               
+    60              1                        101         x_stage3_real[7] <= ((x_stage2_real_ex[6] - x_stage2_real_ex[7]) >> 1);
+    61              1                        101         x_stage3_image[7] <= ((x_stage2_image_ex[6] - x_stage2_image_ex[7]) >> 1);
+    62                                               
+    63                                               
+    64              1                        101         stage3_done<=1'b1;              
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                          8         8         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /testbench_top/DUV/link3 --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               CLK           1           1      100.00 
+                                            nRESET           1           1      100.00 
+                                       stage2_done           1           1      100.00 
+                                       stage3_done           1           1      100.00 
+
+Total Node Count     =          4 
+Toggled Node Count   =          4 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (8 of 8 bins)
+
+=================================================================================
+=== Instance: /testbench_top/DUV
+=== Design Unit: work.FFT_TOP
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         5         5         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /testbench_top/DUV
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_TOP.sv
+------------------------------------IF Branch------------------------------------
+    21                                       109     Count coming in to IF
+    21              1                        100         if(FFT_FINISH)
+                                               9     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    24                                       109     Count coming in to IF
+    24              1                          6         if(!nRESET)
+    34              1                        100         else if(stage3_done) begin
+                                               3     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      24        24         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /testbench_top/DUV --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File FFT_TOP.sv
+    1                                                module FFT_TOP(
+    2                                                input CLK,nRESET,ENABLE,
+    3                                                input wire signed [11:0] signal_in_time [0:7], //5 integer   7 fraction    
+    4                                                output reg signed [11:0] signal_in_frequency_real [0:7], //8 integer   4 fraction
+    5                                                output reg signed [11:0] signal_in_frequency_image [0:7], //8 integer   4 fraction
+    6                                                output reg FFT_FINISH
+    7                                                );
+    8                                                
+    9                                                wire stage1_done,stage2_done,stage3_done;
+    10                                               wire signed [11:0] x_stage1_real  [0:7];  //6 integer   6 fraction
+    11                                               wire signed [11:0] x_stage1_image [0:7];  //6 integer   6 fraction
+    12                                               
+    13                                               wire signed [11:0] x_stage2_real [0:7];    //7 integer   5 fraction
+    14                                               wire signed [11:0] x_stage2_image [0:7];   //7 integer   5 fraction
+    15                                               
+    16                                               wire signed [11:0] x_stage3_real [0:7];    //8 integer   4 fraction
+    17                                               wire signed [11:0] x_stage3_image [0:7];   //8 integer   4 fraction
+    18                                               
+    19              1                        109     always@(posedge CLK or negedge nRESET)
+    20                                               begin
+    21                                                   if(FFT_FINISH)
+    22              1                        100            FFT_FINISH <= 1'b0;
+    23                                               
+    24                                                   if(!nRESET)
+    25                                                   begin
+    26              1                          6             FFT_FINISH <=0;
+    27              1                          6             for(int i=0; i<8; i=i+1)
+    27              2                         48     
+    28                                                       begin
+    29              1                         48                 signal_in_frequency_real[i] <=12'sd0;
+    30              1                         48                 signal_in_frequency_image[i] <=12'sd0;    
+    31                                                       end 
+    32                                                   end
+    33                                               
+    34                                                   else if(stage3_done) begin
+    35                                               
+    36              1                        100                 signal_in_frequency_real[0] <= x_stage3_real[0];
+    37              1                        100                 signal_in_frequency_image[0] <= x_stage3_image[0];
+    38                                               
+    39              1                        100                 signal_in_frequency_real[1] <= x_stage3_real[4];
+    40              1                        100                 signal_in_frequency_image[1] <= x_stage3_image[4];
+    41                                               
+    42              1                        100                 signal_in_frequency_real[2] <= x_stage3_real[2];
+    43              1                        100                 signal_in_frequency_image[2] <= x_stage3_image[2];
+    44                                               
+    45              1                        100                 signal_in_frequency_real[3] <= x_stage3_real[6];
+    46              1                        100                 signal_in_frequency_image[3] <= x_stage3_image[6];
+    47                                               
+    48              1                        100                 signal_in_frequency_real[4] <= x_stage3_real[1];
+    49              1                        100                 signal_in_frequency_image[4] <= x_stage3_image[1];
+    50                                               
+    51              1                        100                 signal_in_frequency_real[5] <= x_stage3_real[5];
+    52              1                        100                 signal_in_frequency_image[5] <= x_stage3_image[5];
+    53                                               
+    54              1                        100                 signal_in_frequency_real[6] <= x_stage3_real[3];
+    55              1                        100                 signal_in_frequency_image[6] <= x_stage3_image[3];
+    56                                               
+    57              1                        100                 signal_in_frequency_real[7] <= x_stage3_real[7];
+    58              1                        100                 signal_in_frequency_image[7] <= x_stage3_image[7];
+    59                                               
+    60              1                        100                 FFT_FINISH <=1;
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                         14        14         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /testbench_top/DUV --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               CLK           1           1      100.00 
+                                            ENABLE           1           1      100.00 
+                                        FFT_FINISH           1           1      100.00 
+                                            nRESET           1           1      100.00 
+                                       stage1_done           1           1      100.00 
+                                       stage2_done           1           1      100.00 
+                                       stage3_done           1           1      100.00 
+
+Total Node Count     =          7 
+Toggled Node Count   =          7 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (14 of 14 bins)
+
+=================================================================================
+=== Instance: /testbench_top
+=== Design Unit: work.testbench_top
+=================================================================================
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                       8         8         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /testbench_top --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File testbench_top.sv
+    3                                                module testbench_top();
+    4                                                parameter period = 10;
+    5                                                bit CLK;
+    6                                                fft_interface vif(CLK);
+    7               1                          1     test t0= new;
+    8                                                
+    9                                                initial begin
+    10              1                          1         CLK <= 0;
+    11              1                          1         t0.e0.vif = vif;
+    12              1                          1         t0.run();
+    13                                               
+    14              1                          1         #(5*period)
+    15              1                          1         $finish;
+    16                                               end
+    17                                               
+    18                                               
+    19                                               
+    20                                               
+    21                                               FFT_TOP DUV (
+    22                                               .CLK(CLK), .nRESET(vif.nRESET), .ENABLE(vif.ENABLE),
+    23                                               .signal_in_time(vif.signal_in_time), .signal_in_frequency_real(vif.signal_in_frequency_real), .signal_in_frequency_image(vif.signal_in_frequency_image),
+    24                                               .FFT_FINISH(vif.FFT_FINISH)
+    25                                               );
+    26                                               
+    27              1                        224     always #(period/2) CLK = ~CLK;
+    27              2                        223     
+
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                          2         2         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /testbench_top --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                               CLK           1           1      100.00 
+
+Total Node Count     =          1 
+Toggled Node Count   =          1 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (2 of 2 bins)
+
+=================================================================================
+=== Instance: /testbench_top_sv_unit
+=== Design Unit: work.testbench_top_sv_unit
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        22        16         6    72.72%
+
+================================Branch Details================================
+
+Branch Coverage for instance /testbench_top_sv_unit
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File monitor.sv
+------------------------------------IF Branch------------------------------------
+    13                                       107     Count coming in to IF
+    13              1                          1         if(i==0)
+                                             106     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+  File generator.sv
+------------------------------------IF Branch------------------------------------
+    24                                       107     Count coming in to IF
+    24              1                          3         if(i==-1 || i==103 || i==105)
+                                             104     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    35                                       104     Count coming in to IF
+    35              1                          1         if(i==104)
+    46              1                        103         else
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+  File scoreboard.sv
+------------------------------------IF Branch------------------------------------
+    22                                       107     Count coming in to IF
+    22              1                          7              if(!observed.FFT_FINISH)
+                                             100     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    44                                       800     Count coming in to IF
+    44              1                        200                     if(observed.signal_in_freq_in_decimal_real[i] >= ref_observed.signal_in_freq_in_decimal_real[i])
+    52              1                        600                     else if(ref_observed.signal_in_freq_in_decimal_real[i] > observed.signal_in_freq_in_decimal_real[i])
+                                         ***0***     All False Count
+Branch totals: 2 hits of 3 branches = 66.66%
+
+------------------------------------IF Branch------------------------------------
+    46                                       200     Count coming in to IF
+    46              1                        200                         if(((observed.signal_in_freq_in_decimal_real[i] - ref_observed.signal_in_freq_in_decimal_real[i]) < error))
+    48              1                    ***0***                         else
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    54                                       600     Count coming in to IF
+    54              1                        600                         if(((ref_observed.signal_in_freq_in_decimal_real[i] - observed.signal_in_freq_in_decimal_real[i]) < error))
+    56              1                    ***0***                         else
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    62                                       800     Count coming in to IF
+    62              1                        452                     if(observed.signal_in_freq_in_decimal_image[i] >= ref_observed.signal_in_freq_in_decimal_image[i])
+    70              1                        348                     else if(ref_observed.signal_in_freq_in_decimal_image[i] > observed.signal_in_freq_in_decimal_image[i])
+                                         ***0***     All False Count
+Branch totals: 2 hits of 3 branches = 66.66%
+
+------------------------------------IF Branch------------------------------------
+    64                                       452     Count coming in to IF
+    64              1                        452                         if(((observed.signal_in_freq_in_decimal_image[i] - ref_observed.signal_in_freq_in_decimal_image[i]) < error))
+    66              1                    ***0***                         else
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    72                                       348     Count coming in to IF
+    72              1                        348                         if(((ref_observed.signal_in_freq_in_decimal_image[i] - observed.signal_in_freq_in_decimal_image[i]) < error))
+    74              1                    ***0***                         else
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                      13         7         6    53.84%
+
+================================Condition Details================================
+
+Condition Coverage for instance /testbench_top_sv_unit --
+
+  File monitor.sv
+----------------Focused Condition View-------------------
+Line       13 Item    1  (i == 0)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+    (i == 0)         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (i == 0)_0            -                             
+  Row   2:          1  (i == 0)_1            -                             
+
+
+----------------Focused Condition View-------------------
+Line       24 Item    1  (((i == -1) || (i == 103)) || (i == 105))
+Condition totals: 3 of 3 input terms covered = 100.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+   (i == -1)         Y
+  (i == 103)         Y
+  (i == 105)         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (i == -1)_0           (~(i == 105) && ~(i == 103))  
+  Row   2:          1  (i == -1)_1           -                             
+  Row   3:          1  (i == 103)_0          (~(i == 105) && ~(i == -1))   
+  Row   4:          1  (i == 103)_1          ~(i == -1)                    
+  Row   5:          1  (i == 105)_0          ~((i == -1) || (i == 103))    
+  Row   6:          1  (i == 105)_1          ~((i == -1) || (i == 103))    
+
+----------------Focused Condition View-------------------
+Line       35 Item    1  (i == 104)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+  (i == 104)         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (i == 104)_0          -                             
+  Row   2:          1  (i == 104)_1          -                             
+
+
+----------------Focused Condition View-------------------
+Line       44 Item    1  (observed.signal_in_freq_in_decimal_real[i] >= ref_observed.signal_in_freq_in_decimal_real[i])
+Condition totals: 1 of 1 input term covered = 100.00%
+
+                                                                                      Input Term   Covered  Reason for no coverage   Hint
+                                                                                     -----------  --------  -----------------------  --------------
+  (observed.signal_in_freq_in_decimal_real[i] >= ref_observed.signal_in_freq_in_decimal_real[i])         Y
+
+     Rows:       Hits  FEC Target                                                                                        Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                              -------------------------     
+  Row   1:          1  (observed.signal_in_freq_in_decimal_real[i] >= ref_observed.signal_in_freq_in_decimal_real[i])_0  -                             
+  Row   2:          1  (observed.signal_in_freq_in_decimal_real[i] >= ref_observed.signal_in_freq_in_decimal_real[i])_1  -                             
+
+----------------Focused Condition View-------------------
+Line       46 Item    1  ((observed.signal_in_freq_in_decimal_real[i] - ref_observed.signal_in_freq_in_decimal_real[i]) < 0)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                                                                                           Input Term   Covered  Reason for no coverage   Hint
+                                                                                          -----------  --------  -----------------------  --------------
+  ((observed.signal_in_freq_in_decimal_real[i] - ref_observed.signal_in_freq_in_decimal_real[i]) < 0)         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                                                                                             Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                                   -------------------------     
+  Row   1:    ***0***  ((observed.signal_in_freq_in_decimal_real[i] - ref_observed.signal_in_freq_in_decimal_real[i]) < 0)_0  -                             
+  Row   2:          1  ((observed.signal_in_freq_in_decimal_real[i] - ref_observed.signal_in_freq_in_decimal_real[i]) < 0)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       52 Item    1  (ref_observed.signal_in_freq_in_decimal_real[i] > observed.signal_in_freq_in_decimal_real[i])
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                                                                                     Input Term   Covered  Reason for no coverage   Hint
+                                                                                    -----------  --------  -----------------------  --------------
+  (ref_observed.signal_in_freq_in_decimal_real[i] > observed.signal_in_freq_in_decimal_real[i])         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                                                                                       Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                             -------------------------     
+  Row   1:    ***0***  (ref_observed.signal_in_freq_in_decimal_real[i] > observed.signal_in_freq_in_decimal_real[i])_0  -                             
+  Row   2:          1  (ref_observed.signal_in_freq_in_decimal_real[i] > observed.signal_in_freq_in_decimal_real[i])_1  -                             
+
+----------------Focused Condition View-------------------
+Line       54 Item    1  ((ref_observed.signal_in_freq_in_decimal_real[i] - observed.signal_in_freq_in_decimal_real[i]) < 0)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                                                                                           Input Term   Covered  Reason for no coverage   Hint
+                                                                                          -----------  --------  -----------------------  --------------
+  ((ref_observed.signal_in_freq_in_decimal_real[i] - observed.signal_in_freq_in_decimal_real[i]) < 0)         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                                                                                             Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                                   -------------------------     
+  Row   1:    ***0***  ((ref_observed.signal_in_freq_in_decimal_real[i] - observed.signal_in_freq_in_decimal_real[i]) < 0)_0  -                             
+  Row   2:          1  ((ref_observed.signal_in_freq_in_decimal_real[i] - observed.signal_in_freq_in_decimal_real[i]) < 0)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       62 Item    1  (observed.signal_in_freq_in_decimal_image[i] >= ref_observed.signal_in_freq_in_decimal_image[i])
+Condition totals: 1 of 1 input term covered = 100.00%
+
+                                                                                        Input Term   Covered  Reason for no coverage   Hint
+                                                                                       -----------  --------  -----------------------  --------------
+  (observed.signal_in_freq_in_decimal_image[i] >= ref_observed.signal_in_freq_in_decimal_image[i])         Y
+
+     Rows:       Hits  FEC Target                                                                                          Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                                -------------------------     
+  Row   1:          1  (observed.signal_in_freq_in_decimal_image[i] >= ref_observed.signal_in_freq_in_decimal_image[i])_0  -                             
+  Row   2:          1  (observed.signal_in_freq_in_decimal_image[i] >= ref_observed.signal_in_freq_in_decimal_image[i])_1  -                             
+
+----------------Focused Condition View-------------------
+Line       64 Item    1  ((observed.signal_in_freq_in_decimal_image[i] - ref_observed.signal_in_freq_in_decimal_image[i]) < 0)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                                                                                             Input Term   Covered  Reason for no coverage   Hint
+                                                                                            -----------  --------  -----------------------  --------------
+  ((observed.signal_in_freq_in_decimal_image[i] - ref_observed.signal_in_freq_in_decimal_image[i]) < 0)         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                                                                                               Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                                     -------------------------     
+  Row   1:    ***0***  ((observed.signal_in_freq_in_decimal_image[i] - ref_observed.signal_in_freq_in_decimal_image[i]) < 0)_0  -                             
+  Row   2:          1  ((observed.signal_in_freq_in_decimal_image[i] - ref_observed.signal_in_freq_in_decimal_image[i]) < 0)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       70 Item    1  (ref_observed.signal_in_freq_in_decimal_image[i] > observed.signal_in_freq_in_decimal_image[i])
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                                                                                       Input Term   Covered  Reason for no coverage   Hint
+                                                                                      -----------  --------  -----------------------  --------------
+  (ref_observed.signal_in_freq_in_decimal_image[i] > observed.signal_in_freq_in_decimal_image[i])         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                                                                                         Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                               -------------------------     
+  Row   1:    ***0***  (ref_observed.signal_in_freq_in_decimal_image[i] > observed.signal_in_freq_in_decimal_image[i])_0  -                             
+  Row   2:          1  (ref_observed.signal_in_freq_in_decimal_image[i] > observed.signal_in_freq_in_decimal_image[i])_1  -                             
+
+----------------Focused Condition View-------------------
+Line       72 Item    1  ((ref_observed.signal_in_freq_in_decimal_image[i] - observed.signal_in_freq_in_decimal_image[i]) < 0)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                                                                                             Input Term   Covered  Reason for no coverage   Hint
+                                                                                            -----------  --------  -----------------------  --------------
+  ((ref_observed.signal_in_freq_in_decimal_image[i] - observed.signal_in_freq_in_decimal_image[i]) < 0)         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                                                                                               Non-masking condition(s)      
+ ---------  ---------  --------------------                                                                                     -------------------------     
+  Row   1:    ***0***  ((ref_observed.signal_in_freq_in_decimal_image[i] - observed.signal_in_freq_in_decimal_image[i]) < 0)_0  -                             
+  Row   2:          1  ((ref_observed.signal_in_freq_in_decimal_image[i] - observed.signal_in_freq_in_decimal_image[i]) < 0)_1  -                             
+
+
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                     106        99         7    93.39%
+
+================================Statement Details================================
+
+Statement Coverage for instance /testbench_top_sv_unit --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File driver.sv
+    1                                                import fft_pkg::*;
+    2                                                
+    3                                                class driver;
+    4                                                
+    5                                                virtual fft_interface vif;
+    6                                                event drv_done;
+    7                                                mailbox drv_mbx;
+    8                                                
+    9                                                task run;
+    10              1                          1     forever begin
+    11                                                   transaction item;
+    12              1                        108         drv_mbx.get(item);
+    13              1                        107         @(negedge vif.CLK);
+    14              1                        107         vif.nRESET = item.nRESET;
+    15              1                        107         vif.ENABLE = item.ENABLE;
+    16              1                        107         vif.signal_in_time = item.signal_in_time;
+    17                                               
+    18              1                        107         ->drv_done;
+
+  File monitor.sv
+    1                                                import fft_pkg::*;
+    2                                                
+    3                                                class monitor;
+    4                                                
+    5                                                virtual fft_interface vif;
+    6                                                mailbox scb_mbx;
+    7                                                
+    8                                                task run();
+    9               1                          1     integer i=0;
+    10              1                          1     forever begin
+    11              1                        108         transaction observed= new;
+    12              1                        108         @(negedge vif.CLK);
+    13                                                   if(i==0)
+    14                                                   begin
+    15              1                          1         @(negedge vif.CLK);
+    16              1                          1         @(negedge vif.CLK);
+    17              1                          1         @(negedge vif.CLK);
+    18              1                          1         @(negedge vif.CLK);
+    19              1                          1         i=i+1;
+    20                                                   end
+    21              1                        107         observed.nRESET = vif.nRESET;
+    22              1                        107         observed.ENABLE = vif.ENABLE;
+    23              1                        107         observed.signal_in_time = vif.signal_in_time;
+    24              1                        107         observed.signal_in_frequency_real = vif.signal_in_frequency_real;
+    25              1                        107         observed.signal_in_frequency_image = vif.signal_in_frequency_image;
+    26              1                        107         observed.FFT_FINISH = vif.FFT_FINISH;
+    27              1                        107         scb_mbx.put(observed);
+
+  File generator.sv
+    1                                                import fft_pkg::*;
+    2                                                class generator;
+    3                                                
+    4                                                int loop = 100;
+    5                                                event drv_done;
+    6                                                mailbox drv_mbx;
+    7                                                
+    8                                                
+    9                                                
+    10                                               task run();
+    11                                               integer fd; 
+    12                                               transaction item;
+    13                                               
+    14              1                          1     fd = $fopen("fft_inputs.txt", "r");
+    15                                               
+    16                                               /*item = new;
+    17                                               item.nRESET = 0;
+    18                                               drv_mbx.put(item);
+    19                                               @(drv_done);*/
+    20                                               
+    21              1                          1     for(int i=-1; i < loop+6; i++)
+    21              2                        107     
+    22                                               begin
+    23              1                        107         transaction item = new;
+    24                                                   if(i==-1 || i==103 || i==105)
+    25                                                   begin
+    26              1                          3            item.nRESET = 0;
+    27              1                          3            item.ENABLE = 0;
+    28              1                          3            for (int j=0; j<8 ; j++)
+    28              2                         24     
+    29              1                         24                item.signal_in_time[j] = 0;
+    30              1                          3            drv_mbx.put(item);
+    31              1                          3            @(drv_done);
+    32              1                          3            continue;
+    33                                                   end
+    34                                               
+    35                                                   if(i==104)
+    36                                                   begin
+    37              1                          1             item.nRESET = 1;
+    38              1                          1             item.ENABLE = 1;
+    39              1                          1             for (int j=0; j<8 ; j++)
+    39              2                          8     
+    40              1                          8                 item.signal_in_time[j] = 0;
+    41              1                          1             drv_mbx.put(item);
+    42              1                          1             @(drv_done);
+    43              1                          1            continue;
+    44                                                   end
+    45                                                   
+    46                                                   else
+    47                                                   begin
+    48              1                        103             for (int j=0; j<8 ; j++)
+    48              2                        824     
+    49                                                       begin
+    50              1                        824                 $fscanf(fd, "%b", item.signal_in_time[j]);
+    51                                                       end
+    52              1                        103             item.nRESET = 1;
+    53              1                        103             item.ENABLE = 1;
+    54              1                        103             drv_mbx.put(item);
+    55              1                        103             @(drv_done);
+    56              1                        103            continue;
+    57                                                   end
+    58                                               
+    59                                               
+    60                                               end
+    61              1                          1     $fclose(fd);
+
+  File scoreboard.sv
+    1                                                import fft_pkg::*;
+    2                                                
+    3                                                class scoreboard;
+    4                                                mailbox scb_mbx;
+    5                                                
+    6                                                task run();
+    7                                                integer fd; 
+    8                                                integer fd_real; 
+    9                                                integer fd_image; 
+    10              1                          1     integer number_of_iteration=1;
+    11                                               real error_in_real, error_in_image;
+    12                                               parameter error= 0.32;
+    13                                               
+    14              1                          1     integer x=0;
+    15              1                          1     fd = $fopen("fft_outputs.txt", "r");
+    16              1                          1     fd_real = $fopen("error_RTL_MATLAB_real.txt", "w");
+    17              1                          1     fd_image = $fopen("error_RTL_MATLAB_image.txt", "w");
+    18                                               
+    19              1                          1     forever begin
+    20                                                   transaction observed, ref_observed;
+    21              1                        108         scb_mbx.get(observed);
+    22                                                        if(!observed.FFT_FINISH)
+    23                                                        begin
+    24              1                          7                continue;
+    25                                                        end
+    26              1                        100                 ref_observed = new();
+    27              1                        100                 $display("test= %0d",number_of_iteration);
+    28              1                        100                 number_of_iteration = number_of_iteration+1;
+    29              1                        100                 for (int i=0; i<8 ; i++)
+    29              2                        800     
+    30                                                           begin
+    31              1                        800                     observed.signal_in_freq_in_decimal_real[i] = 0.0625*observed.signal_in_frequency_real[i][0] + 0.125*observed.signal_in_frequency_real[i][1] + 0.25*observed.signal_in_frequency_real[i][2] + 0.5*observed.signal_in_frequency_real[i][3] + 1*observed.signal_in_frequency_real[i][4] + 2*observed.signal_in_frequency_real[i][5] + 4*observed.signal_in_frequency_real[i][6] + 8*observed.signal_in_frequency_real[i][7] + 16*observed.signal_in_frequency_real[i][8] + 32*observed.signal_in_frequency_real[i][9] + 64*observed.signal_in_frequency_real[i][10] - 128*observed.signal_in_frequency_real[i][11];
+    32              1                        800                     observed.signal_in_freq_in_decimal_image[i] = 0.0625*observed.signal_in_frequency_image[i][0] + 0.125*observed.signal_in_frequency_image[i][1] + 0.25*observed.signal_in_frequency_image[i][2] + 0.5*observed.signal_in_frequency_image[i][3] + 1*observed.signal_in_frequency_image[i][4] + 2*observed.signal_in_frequency_image[i][5] + 4*observed.signal_in_frequency_image[i][6] + 8*observed.signal_in_frequency_image[i][7] + 16*observed.signal_in_frequency_image[i][8] + 32*observed.signal_in_frequency_image[i][9] + 64*observed.signal_in_frequency_image[i][10] - 128*observed.signal_in_frequency_image[i][11];
+    33              1                        800                     $fscanf(fd, "%f %f", ref_observed.signal_in_freq_in_decimal_real[i] , ref_observed.signal_in_freq_in_decimal_image[i]);
+    34                                                               
+    35              1                        800                     error_in_real=(observed.signal_in_freq_in_decimal_real[i]-ref_observed.signal_in_freq_in_decimal_real[i]);
+    36                                               
+    37              1                        800                     error_in_image=(observed.signal_in_freq_in_decimal_image[i]-ref_observed.signal_in_freq_in_decimal_image[i]);
+    38                                               
+    39              1                        800                     $fdisplay(fd_real, "%f", error_in_real);
+    40              1                        800                     $fdisplay(fd_image, "%f", error_in_image);
+    41                                                               //$display("matlab real[%0d]= %f     RTL real[i]= %f",i, ref_observed.signal_in_freq_in_decimal_real[i], observed.signal_in_freq_in_decimal_real[i]);
+    42                                                               //$display("matlab image[%0d]= %f     RTL image[i]= %f",i, ref_observed.signal_in_freq_in_decimal_image[i], observed.signal_in_freq_in_decimal_image[i]);
+    43                                                
+    44                                                               if(observed.signal_in_freq_in_decimal_real[i] >= ref_observed.signal_in_freq_in_decimal_real[i])
+    45                                                               begin
+    46                                                                   if(((observed.signal_in_freq_in_decimal_real[i] - ref_observed.signal_in_freq_in_decimal_real[i]) < error))
+    47              1                        200                          $display("N=%0d Match! (real)", i+1);
+    48                                                                   else
+    49              1                    ***0***                            $display("N=%0d Not match! (real)      matlab real[%0d]= %f     RTL real[i]= %f", i+1,i, ref_observed.signal_in_freq_in_decimal_real[i], observed.signal_in_freq_in_decimal_real[i]);
+    50                                                               end
+    51                                               
+    52                                                               else if(ref_observed.signal_in_freq_in_decimal_real[i] > observed.signal_in_freq_in_decimal_real[i])
+    53                                                               begin
+    54                                                                   if(((ref_observed.signal_in_freq_in_decimal_real[i] - observed.signal_in_freq_in_decimal_real[i]) < error))
+    55              1                        600                            $display("N=%0d Match! (real)", i+1);
+    56                                                                   else
+    57              1                    ***0***                            $display("N=%0d Not match! (real)      matlab real[%0d]= %f     RTL real[i]= %f", i+1,i, ref_observed.signal_in_freq_in_decimal_real[i], observed.signal_in_freq_in_decimal_real[i]);
+    58                                                               end
+    59                                               
+    60                                               
+    61                                               
+    62                                                               if(observed.signal_in_freq_in_decimal_image[i] >= ref_observed.signal_in_freq_in_decimal_image[i])
+    63                                                               begin
+    64                                                                   if(((observed.signal_in_freq_in_decimal_image[i] - ref_observed.signal_in_freq_in_decimal_image[i]) < error))
+    65              1                        452                            $display("N=%0d Match! (image)\n", i+1);
+    66                                                                   else
+    67              1                    ***0***                            $display("N=%0d Not match! (image)      matlab image[%0d]= %f     RTL image[i]= %f\n", i+1,i, ref_observed.signal_in_freq_in_decimal_image[i], observed.signal_in_freq_in_decimal_image[i]);
+    68                                                               end
+    69                                               
+    70                                                               else if(ref_observed.signal_in_freq_in_decimal_image[i] > observed.signal_in_freq_in_decimal_image[i])
+    71                                                               begin
+    72                                                                   if(((ref_observed.signal_in_freq_in_decimal_image[i] - observed.signal_in_freq_in_decimal_image[i]) < error))
+    73              1                        348                            $display("N=%0d Match! (image)\n", i+1);
+    74                                                                   else
+    75              1                    ***0***                            $display("N=%0d Not match! (image)      matlab image[%0d]= %f     RTL image[i]= %f\n", i+1,i, ref_observed.signal_in_freq_in_decimal_image[i], observed.signal_in_freq_in_decimal_image[i]);
+    76                                                               end
+    77                                               
+    78                                               
+    79                                               
+    80                                                           end
+    81              1                        100                $display("\n");
+    82                                               end
+    83              1                    ***0***     $fclose(fd);
+    84              1                    ***0***     $fclose(fd_real);
+    85              1                    ***0***     $fclose(fd_image);
+
+  File environment.sv
+    1                                                `include "driver.sv"
+    2                                                `include "monitor.sv"
+    3                                                `include "generator.sv"
+    4                                                `include "scoreboard.sv"
+    5                                                
+    6                                                class environment;
+    7                                                generator g0;
+    8                                                driver d0;
+    9                                                monitor m0;
+    10                                               scoreboard s0;
+    11                                               
+    12                                               mailbox drv_mbx;
+    13                                               mailbox scb_mbx;
+    14                                               
+    15                                               virtual fft_interface vif;
+    16                                               
+    17                                               event drv_done;
+    18                                               
+    19                                               
+    20                                               function new();
+    21              1                          1     g0 = new;
+    22              1                          1     d0 = new;
+    23              1                          1     m0 = new;
+    24              1                          1     s0 = new;
+    25              1                          1     drv_mbx = new;
+    26              1                          1     scb_mbx = new;
+    27                                               endfunction
+    28                                               
+    29                                               
+    30                                               
+    31                                               virtual task run();
+    32              1                          1     d0.vif = vif;
+    33              1                          1     m0.vif = vif;
+    34                                               
+    35              1                          1     d0.drv_mbx = drv_mbx;
+    36              1                          1     g0.drv_mbx = drv_mbx;
+    37                                               
+    38              1                          1     m0.scb_mbx = scb_mbx;
+    39              1                          1     s0.scb_mbx = scb_mbx;
+    40                                               
+    41              1                          1     d0.drv_done = drv_done;
+    42              1                          1     g0.drv_done = drv_done;
+    43                                               
+    44                                               fork
+    45              1                          1         s0.run();
+    46              1                          1         d0.run();
+    47              1                          1         m0.run();
+    48              1                          1         g0.run();
+
+  File test.sv
+    1                                                `include "environment.sv"
+    2                                                class test;
+    3                                                environment e0;
+    4                                                mailbox drv_mbx;
+    5                                                
+    6                                                function new();
+    7               1                          1       drv_mbx = new();
+    8               1                          1       e0 = new();
+    9                                                endfunction
+    10                                               
+    11                                               virtual task run();
+    12              1                          1       e0.d0.drv_mbx = drv_mbx;
+    13              1                          1       e0.run();
+
+
+
+Total Coverage By Instance (filtered view): 84.11%
+
