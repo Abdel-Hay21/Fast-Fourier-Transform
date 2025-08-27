@@ -1,0 +1,26 @@
+
+13. Printing statistics.
+
+=== FFT_TOP ===
+
+   Number of wires:               2719
+   Number of wire bits:           3730
+   Number of public wires:          64
+   Number of public wire bits:     691
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3519
+     $_ANDNOT_                     891
+     $_AND_                        114
+     $_MUX_                          9
+     $_NAND_                        66
+     $_NOR_                        510
+     $_NOT_                         50
+     $_ORNOT_                       86
+     $_OR_                         302
+     $_SDFFE_PN0P_                 544
+     $_SDFF_PN0_                     4
+     $_XNOR_                       210
+     $_XOR_                        733
+

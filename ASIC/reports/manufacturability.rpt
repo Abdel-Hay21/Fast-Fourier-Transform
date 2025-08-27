@@ -1,0 +1,17 @@
+Design Name: FFT_TOP
+Run Directory: /home/opentools/OpenLane/designs/fft/runs/freq150
+----------------------------------------
+
+Magic DRC Summary:
+Source: /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/36-FFT_TOP.lvs.lef.log
+LVS reports no net, device, pin, or property mismatches.
+Total errors = 0
+----------------------------------------
+
+Antenna Summary:
+No antenna report found.

@@ -1,0 +1,13 @@
+create_clock -name CLK -period 6.667 [get_ports CLK]
+
+set_clock_transition 0.1 [get_clocks CLK]
+
+set_driving_cell -lib_cell sky130_fd_sc_hd__buf_4 [get_ports {signal_in_time_0 signal_in_time_1 signal_in_time_2 signal_in_time_3 signal_in_time_4 signal_in_time_5 signal_in_time_6 signal_in_time_7}]
+
+
+set_load 1 [get_ports {signal_in_frequency_image_0 signal_in_frequency_image_1 signal_in_frequency_image_2 signal_in_frequency_image_3 signal_in_frequency_image_4 signal_in_frequency_image_5 signal_in_frequency_image_6 signal_in_frequency_image_7 signal_in_frequency_real_0 signal_in_frequency_real_1 signal_in_frequency_real_2 signal_in_frequency_real_3 signal_in_frequency_real_4 signal_in_frequency_real_5 signal_in_frequency_real_6 signal_in_frequency_real_7 FFT_FINISH}]
+
+
+set_clock_uncertainty -setup 0.1 [get_clocks CLK]
+
+set_clock_uncertainty -hold 0.2 [get_clocks CLK]

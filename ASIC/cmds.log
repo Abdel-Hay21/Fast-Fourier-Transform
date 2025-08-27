@@ -1,0 +1,160 @@
+Sun Aug 17 08:45:29 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/odbpy/lefutil.py get_metal_layers -o /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/layers.list /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef"
+
+Sun Aug 17 08:45:29 EET 2025 - Executing "/home/opentools/OpenLane/scripts/mergeLef.py -o /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/merged.unpadded.nom.lef -i /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef |& tee /dev/null"
+
+Sun Aug 17 08:45:29 EET 2025 - Executing "/home/opentools/OpenLane/scripts/mergeLef.py -o /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/merged.unpadded.min.lef -i /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__min.tlef /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef |& tee /dev/null"
+
+Sun Aug 17 08:45:29 EET 2025 - Executing "/home/opentools/OpenLane/scripts/mergeLef.py -o /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/merged.unpadded.max.lef -i /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__max.tlef /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef |& tee /dev/null"
+
+Sun Aug 17 08:45:29 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/mergeLib.py --output /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/merged.lib --name sky130A_merged /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
+
+Sun Aug 17 08:45:29 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/libtrim.py --cell-file /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/trimmed.lib.exclude.list --output /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/trimmed.lib /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/merged.lib"
+
+Sun Aug 17 08:45:30 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/new_tracks.py -i /home/opentools/OpenLane/pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info -o /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/routing/config.tracks"
+
+Sun Aug 17 08:45:30 EET 2025 - Executing "echo {openlane a633b1fd2529851b284d7704c7f45cad5222f031} > /home/opentools/OpenLane/designs/fft/runs/freq150/OPENLANE_VERSION"
+
+Sun Aug 17 08:45:30 EET 2025 - Executing "sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib > /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/1-sky130_fd_sc_hd__tt_025C_1v80.no_pg.lib"
+
+Sun Aug 17 08:45:30 EET 2025 - Executing "sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/trimmed.lib > /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/synthesis/1-trimmed.no_pg.lib"
+
+Sun Aug 17 08:45:30 EET 2025 - Executing "yosys -c /home/opentools/OpenLane/scripts/yosys/synth.tcl -l /home/opentools/OpenLane/designs/fft/runs/freq150/logs/synthesis/1-synthesis.log |& tee /dev/null"
+
+Sun Aug 17 08:45:35 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/synthesis\/FFT_TOP.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:45:35 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 0/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:45:35 EET 2025 - Executing "sed -i /defparam/d /home/opentools/OpenLane/designs/fft/runs/freq150/results/synthesis/FFT_TOP.v"
+
+Sun Aug 17 08:45:35 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/sta.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/synthesis/2-sta.log"
+
+Sun Aug 17 08:45:36 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/floorplan.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/floorplan/3-initial_fp.log"
+
+Sun Aug 17 08:45:36 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/odbpy/defutil.py extract_core_dims --output-data /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/dimensions.txt --input-lef /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/merged.nom.lef /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/floorplan/3-initial_fp.def"
+
+Sun Aug 17 08:45:37 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/ioplacer.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/floorplan/4-io.log"
+
+Sun Aug 17 08:45:37 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/tapcell.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/floorplan/5-tap.log"
+
+Sun Aug 17 08:45:37 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/pdn.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/floorplan/6-pdn.log"
+
+Sun Aug 17 08:45:38 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/replace.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/placement/7-global.log"
+
+Sun Aug 17 08:45:45 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/resizer.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/placement/8-resizer.log"
+
+Sun Aug 17 08:45:47 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/placement/9-write_verilog.log"
+
+Sun Aug 17 08:45:47 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/placement\/FFT_TOP.resized.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:45:47 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/synthesis\/FFT_TOP.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:45:47 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/opendp.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/placement/10-detailed.log"
+
+Sun Aug 17 08:45:48 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/libtrim.py --cell-file /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/cts/cts.lib.exclude.list --output /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/cts/cts.lib /home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
+
+Sun Aug 17 08:45:48 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/cts.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/cts/11-cts.log"
+
+Sun Aug 17 08:46:11 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/cts/12-write_verilog.log"
+
+Sun Aug 17 08:46:11 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/cts\/FFT_TOP.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:11 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/placement\/FFT_TOP.resized.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:11 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/resizer_timing.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/cts/13-resizer.log"
+
+Sun Aug 17 08:46:12 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/cts/14-write_verilog.log"
+
+Sun Aug 17 08:46:13 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/cts\/FFT_TOP.resized.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:13 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/cts\/FFT_TOP.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:13 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/resizer_routing_timing.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/15-resizer.log"
+
+Sun Aug 17 08:46:14 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/16-write_verilog.log"
+
+Sun Aug 17 08:46:14 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/routing\/FFT_TOP.resized.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:14 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/cts\/FFT_TOP.resized.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:14 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/opendp.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/17-diode_legalization.log"
+
+Sun Aug 17 08:46:15 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/groute.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/18-global.log"
+
+Sun Aug 17 08:46:17 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/fill.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/19-fill.log"
+
+Sun Aug 17 08:46:17 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/20-write_verilog_global.log"
+
+Sun Aug 17 08:46:17 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/tmp\/routing\/19-global.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:17 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/results\/routing\/FFT_TOP.resized.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:46:17 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/droute.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/21-detailed.log"
+
+Sun Aug 17 08:48:26 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/drc_rosetta.py tr to_klayout -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/routing/detailed.klayout.xml --design-name FFT_TOP /home/opentools/OpenLane/designs/fft/runs/freq150/reports/routing/detailed.drc"
+
+Sun Aug 17 08:48:27 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/routing/22-write_verilog_detailed.log"
+
+Sun Aug 17 08:48:27 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/tmp\/routing\/21-detailed.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:48:27 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/tmp\/routing\/19-global.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:48:27 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/rcx.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/23-parasitics_extraction.min.log"
+
+Sun Aug 17 08:48:28 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/sta_multi_corner.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/24-parasitics_multi_corner_sta.min.log"
+
+Sun Aug 17 08:48:33 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/rcx.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/25-parasitics_extraction.max.log"
+
+Sun Aug 17 08:48:34 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/sta_multi_corner.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/26-parasitics_multi_corner_sta.max.log"
+
+Sun Aug 17 08:48:39 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/rcx.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/27-parasitics_extraction.nom.log"
+
+Sun Aug 17 08:48:40 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/sta.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/28-parasitics_sta.log"
+
+Sun Aug 17 08:48:41 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/sta_multi_corner.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/29-parasitics_multi_corner_sta.log"
+
+Sun Aug 17 08:48:46 EET 2025 - Executing "magic -noconsole -dnull -rcfile /home/opentools/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.magicrc < /home/opentools/OpenLane/scripts/magic/mag_gds.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/30-gdsii.log"
+
+Sun Aug 17 08:48:48 EET 2025 - Executing "magic -noconsole -dnull -rcfile /home/opentools/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.magicrc < /home/opentools/OpenLane/scripts/magic/gds_pointers.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/30-gds_ptrs.log"
+
+Sun Aug 17 08:48:49 EET 2025 - Executing "sed -i -n {/^<< properties >>/,/^<< end >>/p} /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/signoff/gds_ptrs.mag"
+
+Sun Aug 17 08:48:49 EET 2025 - Executing "magic -noconsole -dnull -rcfile /home/opentools/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.magicrc < /home/opentools/OpenLane/scripts/magic/lef.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/30-lef.log"
+
+Sun Aug 17 08:48:51 EET 2025 - Executing "magic -noconsole -dnull -rcfile /home/opentools/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.magicrc < /home/opentools/OpenLane/scripts/magic/maglef.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/30-maglef.log"
+
+Sun Aug 17 08:48:51 EET 2025 - Executing "klayout -b -rm /home/opentools/OpenLane/scripts/klayout/def2gds.py -rd out_gds=/home/opentools/OpenLane/designs/fft/runs/freq150/results/signoff/FFT_TOP.klayout.gds -rd tech_file=/home/opentools/OpenLane/pdks/sky130A/libs.tech/klayout/sky130A.lyt -rd design_name=FFT_TOP -rd in_def=/home/opentools/OpenLane/designs/fft/runs/freq150/results/routing/FFT_TOP.def -rd {in_gds=/home/opentools/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds } -rd config_file= -rd seal_gds= -rd lef_file=/home/opentools/OpenLane/designs/fft/runs/freq150/tmp/merged.nom.lef |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/31-gdsii-klayout.log"
+
+Sun Aug 17 08:48:52 EET 2025 - Executing "bash /home/opentools/OpenLane/scripts/klayout/xor.sh /home/opentools/OpenLane/designs/fft/runs/freq150/results/signoff/FFT_TOP.gds /home/opentools/OpenLane/designs/fft/runs/freq150/results/signoff/FFT_TOP.klayout.gds FFT_TOP /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/FFT_TOP.xor.gds |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/32-xor.log"
+
+Sun Aug 17 08:49:00 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/parse_klayout_xor_log.py -l /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/32-xor.log -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/32-xor.rpt"
+
+Sun Aug 17 08:49:01 EET 2025 - Executing "bash /home/opentools/OpenLane/scripts/klayout/xor.sh /home/opentools/OpenLane/designs/fft/runs/freq150/results/signoff/FFT_TOP.gds /home/opentools/OpenLane/designs/fft/runs/freq150/results/signoff/FFT_TOP.klayout.gds FFT_TOP /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/FFT_TOP.xor.xml |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/32-xor.log"
+
+Sun Aug 17 08:49:09 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/parse_klayout_xor_log.py -l /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/32-xor.log -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/32-xor.rpt"
+
+Sun Aug 17 08:49:09 EET 2025 - Executing "magic -noconsole -dnull -rcfile /home/opentools/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.magicrc < /home/opentools/OpenLane/scripts/magic/extract_spice.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/33-spice.log"
+
+Sun Aug 17 08:49:16 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/odbpy/power_utils.py write_powered_def --input-lef /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/merged.nom.lef --power-port VPWR --ground-port VGND --powered-netlist {} --output /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/signoff/33-powered_def.def /home/opentools/OpenLane/designs/fft/runs/freq150/results/routing/FFT_TOP.def |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/34-write_powered_def.log"
+
+Sun Aug 17 08:49:16 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/write_verilog.tcl |& tee /dev/null /dev/null"
+
+Sun Aug 17 08:49:16 EET 2025 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/tmp\/signoff\/33-powered_netlist.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:49:16 EET 2025 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/home\/opentools\/OpenLane\/designs\/fft\/runs\/freq150\/tmp\/routing\/21-detailed.v/} /home/opentools/OpenLane/designs/fft/runs/freq150/config.tcl"
+
+Sun Aug 17 08:49:16 EET 2025 - Executing "netgen -batch source /home/opentools/OpenLane/designs/fft/runs/freq150/tmp/signoff/36-setup_file.lef.lvs |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/36-lef.log"
+
+Sun Aug 17 08:49:17 EET 2025 - Executing "magic -noconsole -dnull -rcfile /home/opentools/OpenLane/pdks/sky130A/libs.tech/magic/sky130A.magicrc < /home/opentools/OpenLane/scripts/magic/drc.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/37-drc.log"
+
+Sun Aug 17 08:49:41 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/drc_rosetta.py magic to_tcl -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.tcl /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.rpt"
+
+Sun Aug 17 08:49:41 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/drc_rosetta.py magic to_tr -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.tr /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.rpt"
+
+Sun Aug 17 08:49:42 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/drc_rosetta.py tr to_klayout -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.klayout.xml --design-name FFT_TOP /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.tr"
+
+Sun Aug 17 08:49:42 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/drc_rosetta.py magic to_tr -o /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.rdb /home/opentools/OpenLane/designs/fft/runs/freq150/reports/signoff/drc.rpt"
+
+Sun Aug 17 08:49:42 EET 2025 - Executing "openroad -exit /home/opentools/OpenLane/scripts/openroad/antenna_check.tcl |& tee /dev/null /home/opentools/OpenLane/designs/fft/runs/freq150/logs/signoff/38-antenna.log"
+
+Sun Aug 17 08:49:43 EET 2025 - Executing "openroad -python /home/opentools/OpenLane/scripts/generate_reports.py -d /home/opentools/OpenLane/designs/fft --design_name FFT_TOP --tag freq150 --output_file /home/opentools/OpenLane/designs/fft/runs/freq150/reports/metrics.csv --man_report /home/opentools/OpenLane/designs/fft/runs/freq150/reports/manufacturability.rpt --run_path /home/opentools/OpenLane/designs/fft/runs/freq150"
+
